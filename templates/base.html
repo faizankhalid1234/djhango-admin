@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,22 +11,11 @@
       integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
       crossorigin="anonymous"
     />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-      body {
-        background: radial-gradient(circle at top left, #111827, #020617);
-        color: #e5e7eb;
-      }
-      .card {
-        background: linear-gradient(145deg, rgba(15,23,42,0.95), rgba(17,24,39,0.95));
-        border-radius: 1rem;
-        border: 1px solid rgba(148, 163, 184, 0.15);
-      }
-    </style>
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
   </head>
   <body data-bs-theme="dark" class="min-h-screen">
     {% include "nav.html" %}
-    <main class="container my-4">
+    <main class="container py-4">
       {% if messages %}
         {% for message in messages %}
           <div class="alert alert-{{ message.tags|default:'info' }} shadow-sm border-0 rounded-3">

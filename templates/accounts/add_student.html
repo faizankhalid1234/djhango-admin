@@ -2,8 +2,9 @@
 {% block content %}
 <div class="row justify-content-center">
   <div class="col-md-7">
-    <h2 class="mb-3">Add Student ({{ view_type }})</h2>
-    <form method="post" enctype="multipart/form-data" class="card p-4">
+    <h2 class="page-title mb-1">Add Student ({{ view_type }})</h2>
+    <p class="page-subtitle mb-3">Fill student details and upload profile image.</p>
+    <form method="post" enctype="multipart/form-data" class="card p-4 p-md-5">
       {% csrf_token %}
       {{ form.as_p }}
       <div class="d-flex gap-2">

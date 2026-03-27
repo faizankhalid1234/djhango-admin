@@ -1,8 +1,5 @@
-<nav
-  class="navbar navbar-expand-lg navbar-dark"
-  style="background: linear-gradient(90deg, #0f172a, #1d4ed8); box-shadow: 0 12px 30px rgba(15,23,42,0.8);"
->
-  <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark py-3">
+  <div class="container">
     <a class="navbar-brand fw-bold" href="{% url 'home' %}">Student Portal</a>
     <button
       class="navbar-toggler"
@@ -38,9 +35,9 @@
         </li>
         {% endif %}
       </ul>
-      <div class="d-flex gap-2">
+      <div class="d-flex align-items-center gap-2">
         {% if user.is_authenticated %}
-        <span class="navbar-text">Hi, {{ user.username }}</span>
+        <span class="navbar-text nav-pill">Hi, {{ user.username }}</span>
         <form method="post" action="{% url 'logout' %}">
           {% csrf_token %}
           <button class="btn btn-outline-danger btn-sm" type="submit">Logout</button>
