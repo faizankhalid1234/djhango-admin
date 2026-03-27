@@ -122,3 +122,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # CSRF hardening for local development
 CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000", "http://localhost:8000"]
 CSRF_COOKIE_SAMESITE = "Lax"
+CSRF_USE_SESSIONS = True
