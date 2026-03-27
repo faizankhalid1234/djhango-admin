@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card p-4">
+  <h3>{{ student.username }}</h3>
+  {% if student.image %}
+  <img src="{{ student.image.url }}" alt="{{ student.username }}" style="max-width: 280px;" class="mb-3">
+  {% endif %}
+  <p><strong>Email:</strong> {{ student.email }}</p>
+  <p><strong>Age:</strong> {{ student.age }}</p>
+  <p><strong>Branch:</strong> {{ student.branch }}</p>
+  <a href="{% url 'student_list' %}" class="btn btn-secondary">Back</a>
+</div>
+{% endblock %}

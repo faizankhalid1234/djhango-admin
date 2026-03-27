@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="text-center py-5">
+  <h1 class="display-5 fw-bold mb-3">Django Full Practice Portal</h1>
+  <p class="lead">Media uploads, authentication, user management, FBV + CBV, search and data queries.</p>
+  <div class="d-flex justify-content-center gap-2 mt-4">
+    <a class="btn btn-primary" href="{% url 'dashboard' %}">Go to Dashboard</a>
+    <a class="btn btn-outline-light" href="{% url 'contact' %}">Contact Page</a>
+  </div>
+</section>
+{% endblock %}

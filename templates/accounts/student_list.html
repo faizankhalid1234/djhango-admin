@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-3">Students</h2>
+<p class="text-muted mb-3">Search, filter, and explore all students in one place.</p>
+
+<form method="get" class="row g-2 mb-4">
+  <div class="col-md-4">
+    <input type="text" name="q" value="{{ query }}" class="form-control" placeholder="Search by username/email">
+  </div>
+  <div class="col-md-3">
+    <select name="branch" class="form-select">
+      <option value="">All Branches</option>
+      {% for value, label in branches %}
+      <option value="{{ value }}" {% if branch == value %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="col-md-3">
+    <select name="order" class="form-select">
+      <option value="username" {% if order == "username" %}selected{% endif %}>Username A-Z</option>
+      <option value="-username" {% if order == "-username" %}selected{% endif %}>Username Z-A</option>
+      <option value="age" {% if order == "age" %}selected{% endif %}>Age Low-High</option>
+      <option value="-age" {% if order == "-age" %}selected{% endif %}>Age High-Low</option>
+    </select>
+  </div>
+  <div class="col-md-2 d-grid">
+    <button class="btn btn-primary">Apply</button>
+  </div>
+</form>
+
+<div class="mb-3">
+  <a href="{% url 'add_student' %}" class="btn btn-success btn-sm">Add (FBV)</a>
+  <a href="{% url 'add_student_cbv' %}" class="btn btn-outline-success btn-sm">Add (CBV)</a>
+</div>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-6">
+    <div class="card p-3">
+      <strong>Total Students:</strong> {{ stats.total_students|default:0 }}<br>
+      <strong>Average Age:</strong> {{ stats.average_age|default:"0"|floatformat:1 }}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card p-3">
+      <strong>Branch Summary:</strong>
+      <ul class="mb-0 mt-2">
+        {% for item in branch_summary %}
+        <li>{{ item.branch }} - {{ item.total }}</li>
+        {% empty %}
+        <li>No data available</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  {% for student in students %}
+  <div class="col-md-4 mb-3">
+    <div class="card h-100">
+      {% if student.image %}
+      <img src="{{ student.image.url }}" class="card-img-top" alt="{{ student.username }}">
+      {% endif %}
+      <div class="card-body">
+        <h5>{{ student.username }}</h5>
+        <p class="mb-2">{{ student.email }} | Age {{ student.age }} | {{ student.branch }}</p>
+        <a class="btn btn-sm btn-outline-info" href="{% url 'student_detail' student.id %}">View</a>
+        <form method="post" action="{% url 'delete_student' student.id %}" class="d-inline">
+          {% csrf_token %}
+          <button class="btn btn-sm btn-danger" onclick="return confirm('Delete student?')">Delete</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p>No students found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

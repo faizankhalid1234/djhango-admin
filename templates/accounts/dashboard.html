@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="mb-4">Dashboard</h2>
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="card p-3 shadow-sm">
+      <strong>Total Students:</strong> {{ student_count }}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3 shadow-sm">
+      <strong>Total Users:</strong> {{ user_count }}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3 shadow-sm">
+      <strong>Average Age:</strong> {{ avg_age|default:"0"|floatformat:1 }}
+    </div>
+  </div>
+</div>
+<div class="mt-4 d-flex flex-wrap gap-2">
+  <a class="btn btn-success" href="{% url 'add_student' %}">Add Student (FBV)</a>
+  <a class="btn btn-outline-success" href="{% url 'add_student_cbv' %}">Add Student (CBV)</a>
+  <a class="btn btn-primary" href="{% url 'student_list' %}">Student List</a>
+</div>
+{% endblock %}
